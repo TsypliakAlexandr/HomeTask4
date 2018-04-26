@@ -18,13 +18,13 @@ public class HTMLUnitOnly {
 		HtmlPage page = webClient.getPage("http://svyatoslav.biz/testlab/wt/");
 		HtmlForm form = page.getForms().get(0);
 		assertTrue(form.isDisplayed());
-		assertTrue(form.asText().contains("Èìÿ"));
-		assertTrue(form.asText().contains("Ðîñò"));
-		assertTrue(form.asText().contains("Âåñ"));
-		assertTrue(form.asText().contains("Ïîë"));
-		assertTrue(form.asText().contains("Ïîë"));
-		assertTrue(form.asText().contains("Ì"));
-		assertTrue(form.asText().contains("Æ"));
+		assertTrue(form.asText().contains("Имя"));
+		assertTrue(form.asText().contains("Рост"));
+		assertTrue(form.asText().contains("Вес"));
+		assertTrue(form.asText().contains("Пол"));
+		assertTrue(form.asText().contains("Пол"));
+		assertTrue(form.asText().contains("М"));
+		assertTrue(form.asText().contains("Ж"));
 
 		HtmlInput nameField = form.getInputByName("name");
 		HtmlInput weightField = form.getInputByName("weight");
@@ -32,11 +32,11 @@ public class HTMLUnitOnly {
 		List<HtmlRadioButtonInput> sexInput = form.getRadioButtonsByName("gender");
 		HtmlRadioButtonInput MaleButton = sexInput.get(0);
 		//HtmlRadioButtonInput FemaleButton = sexInput.get(1); was not used in test
-		HtmlSubmitInput countButton = form.getInputByValue("Ðàññ÷èòàòü");
+		HtmlSubmitInput countButton = form.getInputByValue("Рассчитать");
 		
 		//2
-		nameField.type("Èìÿ");
-		assertEquals(nameField.asText(), "Èìÿ");
+		nameField.type("Имя");
+		assertEquals(nameField.asText(), "Имя");
 		
 		//3
 		weightField.type("50");
@@ -52,7 +52,7 @@ public class HTMLUnitOnly {
 		
 		//6
 		page = countButton.click();
-		assertTrue(page.asText().contains("Ðîñò äîëæåí áûòü â äèàïàçîíå 50-300 ñì."));
+		assertTrue(page.asText().contains("Рост должен быть в диапазоне 50-300 см."));
 		
 		webClient.close();
 	}
