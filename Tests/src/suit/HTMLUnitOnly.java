@@ -18,13 +18,13 @@ public class HTMLUnitOnly {
 		HtmlPage page = webClient.getPage("http://svyatoslav.biz/testlab/wt/");
 		HtmlForm form = page.getForms().get(0);
 		assertTrue(form.isDisplayed());
-		assertTrue(form.asText().contains("Имя"));
-		assertTrue(form.asText().contains("Рост"));
-		assertTrue(form.asText().contains("Вес"));
-		assertTrue(form.asText().contains("Пол"));
-		assertTrue(form.asText().contains("Пол"));
-		assertTrue(form.asText().contains("М"));
-		assertTrue(form.asText().contains("Ж"));
+		assertTrue(form.asText().contains("Г€Г¬Гї"));
+		assertTrue(form.asText().contains("ГђГ®Г±ГІ"));
+		assertTrue(form.asText().contains("Г‚ГҐГ±"));
+		assertTrue(form.asText().contains("ГЏГ®Г«"));
+		assertTrue(form.asText().contains("ГЏГ®Г«"));
+		assertTrue(form.asText().contains("ГЊ"));
+		assertTrue(form.asText().contains("Г†"));
 
 		HtmlInput nameField = form.getInputByName("name");
 		HtmlInput weightField = form.getInputByName("weight");
@@ -32,11 +32,11 @@ public class HTMLUnitOnly {
 		List<HtmlRadioButtonInput> sexInput = form.getRadioButtonsByName("gender");
 		HtmlRadioButtonInput MaleButton = sexInput.get(0);
 		//HtmlRadioButtonInput FemaleButton = sexInput.get(1); was not used in test
-		HtmlSubmitInput countButton = form.getInputByValue("Рассчитать");
+		HtmlSubmitInput countButton = form.getInputByValue("ГђГ Г±Г±Г·ГЁГІГ ГІГј");
 		
 		//2
-		nameField.type("Имя");
-		assertEquals(nameField.asText(), "Имя");
+		nameField.type("Г€Г¬Гї");
+		assertEquals(nameField.asText(), "Г€Г¬Гї");
 		
 		//3
 		weightField.type("50");
@@ -52,8 +52,9 @@ public class HTMLUnitOnly {
 		
 		//6
 		page = countButton.click();
-		assertTrue(page.asText().contains("Рост должен быть в диапазоне 50-300 см."));
+		assertTrue(page.asText().contains("ГђГ®Г±ГІ Г¤Г®Г«Г¦ГҐГ­ ГЎГ»ГІГј Гў Г¤ГЁГ ГЇГ Г§Г®Г­ГҐ 50-300 Г±Г¬."));
 		
 		webClient.close();
 	}
 }
+
